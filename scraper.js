@@ -6,15 +6,15 @@ const fs = require('fs');
   const page = await browser.newPage();
 
   const query = 'MLOps';
-  const url = `https://www.linkedin.com/jobs/search?keywords=${query}`;
+  const url = `https://www.linkedin.com/jobs/search?keywords=MLOps&location=Lebanon&geoId=101834488&trk=public_jobs_jobs-search-bar_search-submit&position=1&pageNum=0&currentJobId=3960300799`;
 
   await page.goto(url, { waitUntil: 'networkidle2' });
 
   // Wait for job listings to load
-  await page.waitForSelector('.result-card__contents');
+  await page.waitForSelector('.base-card__full-link');
 
   const jobs = await page.evaluate(() => {
-    const jobCards = document.querySelectorAll('.result-card__contents');
+    const jobCards = document.querySelectorAll('.base-card__full-link');
     const jobList = [];
 
     jobCards.forEach((card) => {
